@@ -9,7 +9,9 @@ $row_next=mysqli_fetch_assoc($res_next);
 $res_username = mysqli_query($con, "select * from user_data where id = '$receiverId'");
 
 $row_username = mysqli_fetch_assoc($res_username);
-$html='<li class="messages-you" clearfix"><span class="message-img"><img src="image/robot.png" class="avatar-sm rounded-circle"></span><div class="message-body clearfix"><div class="message-header"><strong class="messages-title">'.$row_username['username'].'</strong> <small class="time-messages text-muted"><span class="fas fa-time"></span> <span class="minutes">'.$row_next['time'].'</span></small> </div><p class="messages-p">'.$row_next['message'].'</p></div></li>'; 
+$iv = hex2bin($row_next['iv']);
+$message = decrypt($row_next['message'], $iv);
+$html='<li class="messages-you" clearfix"><span class="message-img"><img src="image/robot.png" class="avatar-sm rounded-circle"></span><div class="message-body clearfix"><div class="message-header"><strong class="messages-title">'.$row_username['username'].'</strong> <small class="time-messages text-muted"><span class="fas fa-time"></span> <span class="minutes">'.$row_next['time'].'</span></small> </div><p class="messages-p">'.$message.'</p></div></li>'; 
 echo $html;
 }
 ?>

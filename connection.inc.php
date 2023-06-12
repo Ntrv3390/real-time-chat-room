@@ -1,4 +1,5 @@
 <?php
+include('functions.inc.php');
 session_start();
 $con = mysqli_connect("localhost", "root", "", "rashid");
 if(!$con)

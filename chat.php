@@ -67,7 +67,8 @@ $res = mysqli_query($con,"select * from user_data where id!='$current_user_id'")
 								{
 									$html='';
 								while($row=mysqli_fetch_assoc($res_chats)){
-									$message=$row['message'];
+									$iv = hex2bin($row['iv']);
+									$message = decrypt($row['message'], $iv);	
 									$time=$row['time'];
 									$strtotime=strtotime($time);
 									$stime=date('h:i A',$strtotime);
